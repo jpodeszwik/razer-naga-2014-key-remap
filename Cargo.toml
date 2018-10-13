@@ -1,0 +1,9 @@
+[package]
+name = "razer-naga2014-key-remap"
+version = "0.1.0"
+authors = ["Jakub Podeszwik <jakubpodeszwik@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+evdev-rs = "0.1.0"
+uinput = "0.1.3"
