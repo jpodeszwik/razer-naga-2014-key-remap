@@ -29,7 +29,7 @@ impl Naga {
 
             let dev = device.unwrap();
 
-            if dev.name().unwrap().eq("Razer Razer Naga 2014") {
+            if dev.name().unwrap().eq("Razer Razer Naga 2014") && dev.phys().unwrap().ends_with("/input2") {
                 return Some(Naga { device: dev, file: f });
             }
         }

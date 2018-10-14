@@ -14,4 +14,3 @@ run as root `target/release/razer-naga2014-key-remap`
 * making keys configurable
 * aur package for achlinux
 * instalation without restart
-* fix searching for razer naga keyboard - currently it can find some other components of naga
