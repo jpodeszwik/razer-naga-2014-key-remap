@@ -1,3 +1,6 @@
+extern crate evdev_rs;
+extern crate uinput;
+
 use std::thread;
 use std::time::Duration;
 
@@ -5,7 +8,6 @@ mod naga;
 mod keymap;
 mod input_device;
 mod event_mapper;
-
 
 fn main() {
     let mut device = input_device::create();

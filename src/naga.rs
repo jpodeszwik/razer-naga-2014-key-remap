@@ -1,8 +1,5 @@
-use evdev_rs::Device;
-use evdev_rs::InputEvent;
-use evdev_rs::ReadStatus;
-use std::fs;
-use std::fs::File;
+use evdev_rs::{BLOCKING, Device, InputEvent, NORMAL, ReadStatus};
+use std::fs::{File, read_dir};
 
 pub struct Naga {
     device: Device,
@@ -13,7 +10,7 @@ pub struct Naga {
 
 impl Naga {
     pub fn new() -> Option<Naga> {
-        let paths = fs::read_dir("/dev/input").unwrap();
+        let paths = read_dir("/dev/input").unwrap();
 
         for path in paths {
             let file = File::open(path.unwrap().path());
@@ -38,7 +35,7 @@ impl Naga {
     }
 
     pub fn next_event(&self) -> Result<(ReadStatus, InputEvent), String> {
-        match self.device.next_event(evdev_rs::NORMAL | evdev_rs::BLOCKING) {
+        match self.device.next_event(NORMAL | BLOCKING) {
             Ok(res) => Ok(res),
             Err(errno) => Err(format!("{}", errno))
         }

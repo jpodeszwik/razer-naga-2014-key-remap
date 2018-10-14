@@ -1,8 +1,9 @@
-use uinput::Device;
+use uinput::{Device, open};
+use uinput::event::Keyboard::All;
 
 pub fn create() -> Device {
-    uinput::open("/dev/uinput").unwrap()
+    open("/dev/uinput").unwrap()
         .name("razer-naga-virtual-keyboard").unwrap()
-        .event(uinput::event::Keyboard::All).unwrap()
+        .event(All).unwrap()
         .create().unwrap()
 }
