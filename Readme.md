@@ -1,4 +1,4 @@
-# Razer Naga2014 key remap
+# Razer Naga 2014 key remap
 This project remaps razer naga 2014 keys into F1..F12 keys in linux operating system.
 
 ## Usage
