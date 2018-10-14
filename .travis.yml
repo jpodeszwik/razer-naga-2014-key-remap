@@ -3,6 +3,10 @@ language: rust
 rust:
   - nightly
 
+before_install:
+  - sudo apt update
+  - sudo apt install -y libudev-dev
+
 script:
   - cargo build --release
 
