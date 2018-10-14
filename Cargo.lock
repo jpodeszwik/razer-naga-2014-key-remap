@@ -154,7 +154,7 @@ version = "0.3.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "razer-naga2014-key-remap"
+name = "razer-naga-2014-key-remap"
 version = "0.1.0"
 dependencies = [
  "evdev-rs 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
