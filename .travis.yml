@@ -5,7 +5,8 @@ before_install:
 - sudo apt update
 - sudo apt install -y libudev-dev
 stages:
-- build
+- name: build
+  if: tag !~ ^v
 - name: publish-github
   if: tag =~ ^v
 - name: publish-crate
@@ -15,11 +16,7 @@ jobs:
   - stage: build
     script: cargo build
   - stage: publish-crate
-    script: cargo login "$CRATES_TOKEN"
-  - stage: publish-crate
-    script: cargo package
-  - stage: publish-crate
-    script: cargo publish
+    script: cargo package && cargo login "$CRATES_TOKEN" && cargo publish
   - stage: publish-github
     script: cargo build --release
     deploy:
@@ -27,4 +24,6 @@ jobs:
       api_key: "$GITHUB_API_KEY"
       file: target/release/razer-naga-2014-key-remap
       skip_cleanup: true
+      on:
+        tags: true
 
