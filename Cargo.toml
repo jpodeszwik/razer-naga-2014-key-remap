@@ -7,6 +7,7 @@ keywords = ["razer", "naga"]
 readme = "README.md"
 repository = "https://github.com/jpodeszwik/razer-naga-2014-key-remap"
 homepage = "https://github.com/jpodeszwik/razer-naga-2014-key-remap"
+description = "This program remaps razer naga 2014 keys into F1..F12 keys in linux operating system."
 
 [dependencies]
 evdev-rs = "0.1.0"
