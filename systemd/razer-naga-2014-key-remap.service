@@ -3,7 +3,7 @@ Description=remap for razer naga 2014 keys
 
 [Service]
 Type=simple
-ExecStart=/usr/sbin/razer-naga-2014-key-remap
+ExecStart=/usr/bin/razer-naga-2014-key-remap
 
 [Install]
 WantedBy=multi-user.target
