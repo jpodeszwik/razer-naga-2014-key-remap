@@ -1,11 +1,10 @@
-use evdev_rs::{BLOCKING, Device, InputEvent, NORMAL, ReadStatus};
+use evdev_rs::{BLOCKING, Device, GrabMode, InputEvent, NORMAL, ReadStatus};
 use std::fs::{File, read_dir};
 
 pub struct Naga {
     device: Device,
     // need to keep this file, otherwise file would be closed too early
-    #[allow(dead_code)]
-    file: File,
+    _file: File,
 }
 
 impl Naga {
@@ -24,10 +23,18 @@ impl Naga {
                 continue;
             }
 
-            let dev = device.unwrap();
+            let mut dev = device.unwrap();
 
             if dev.name().unwrap().eq("Razer Razer Naga 2014") && dev.phys().unwrap().ends_with("/input2") {
-                return Some(Naga { device: dev, file: f });
+                match dev.grab(GrabMode::Grab) {
+                    Ok(_) => {
+                        return Some(Naga { device: dev, _file: f });
+                    }
+                    Err(err) => {
+                        eprintln!("Failed to grab naga device: {}", err);
+                        return None;
+                    }
+                }
             }
         }
 

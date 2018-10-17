@@ -1,7 +1,8 @@
 [package]
 name = "razer-naga-2014-key-remap"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Jakub Podeszwik <jakubpodeszwik@gmail.com>"]
+license = "MIT"
 
 [dependencies]
 evdev-rs = "0.1.0"

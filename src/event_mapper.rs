@@ -8,7 +8,7 @@ pub fn map_events(naga: Naga, input_device: &mut Device) {
     loop {
         let event = naga.next_event();
         match event {
-            Ok(k) => process_event(k.1, input_device),
+            Ok((_read_status, input_event)) => process_event(input_event, input_device),
             Err(e) => {
                 println!("Err: {}", e);
                 return;
