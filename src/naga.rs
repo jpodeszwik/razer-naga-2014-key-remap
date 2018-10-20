@@ -8,43 +8,40 @@ pub struct Naga {
 }
 
 impl Naga {
-    pub fn new() -> Option<Naga> {
-        let paths = read_dir("/dev/input").unwrap();
+    pub fn new() -> Result<Naga, String> {
+        let paths = read_dir("/dev/input")
+            .map_err(|e| format!("Problem reading input devices dir: {}", e))?;
 
-        for path in paths {
-            let file = File::open(path.unwrap().path());
-            if file.is_err() {
-                continue;
-            }
-            let f = file.unwrap();
+        for path_result in paths {
+            let path = match path_result {
+                Ok(p) => p,
+                Err(_) => { continue; }
+            };
 
-            let device = Device::new_from_fd(&f);
-            if device.is_err() {
-                continue;
-            }
+            let file = match File::open(path.path()) {
+                Ok(f) => f,
+                Err(_) => { continue; }
+            };
 
-            let mut dev = device.unwrap();
+            let mut device = match Device::new_from_fd(&file) {
+                Ok(d) => d,
+                Err(_) => { continue; }
+            };
 
-            if dev.name().unwrap().eq("Razer Razer Naga 2014") && dev.phys().unwrap().ends_with("/input2") {
-                match dev.grab(GrabMode::Grab) {
-                    Ok(_) => {
-                        return Some(Naga { device: dev, _file: f });
-                    }
-                    Err(err) => {
-                        eprintln!("Failed to grab naga device: {}", err);
-                        return None;
-                    }
-                }
+            if device.name().unwrap_or("").eq("Razer Razer Naga 2014")
+                && device.phys().unwrap_or("").ends_with("/input2") {
+                device.grab(GrabMode::Grab).map_err(|e| format!("Could not grab device: {}", e))?;
+                return Ok(Naga { device, _file: file });
             }
         }
 
-        None
+        return Err("No device found".to_string());
     }
 
     pub fn next_event(&self) -> Result<(ReadStatus, InputEvent), String> {
         match self.device.next_event(NORMAL | BLOCKING) {
             Ok(res) => Ok(res),
-            Err(errno) => Err(format!("{}", errno))
+            Err(errno) => Err(format!("Problem reading event: {}", errno))
         }
     }
 }

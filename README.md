@@ -9,7 +9,7 @@ This project remaps razer naga 2014 keys in linux operating system.
 
 run as root `cargo run razer-naga-2014-key-remap <path_to_config_file>`
 
-[Example config file](https://github.com/jpodeszwik/razer-naga-2014-key-remap/blob/master/config/razer-naga-2014-key-remap.toml)
+Example configuration [file](https://github.com/jpodeszwik/razer-naga-2014-key-remap/blob/master/config/razer-naga-2014-key-remap.toml)
 
 ## Build from source
 build with cargo `cargo build --release`
@@ -21,7 +21,4 @@ Install [razer-naga-2014-key-remap-bin](https://aur.archlinux.org/packages/razer
 
 Start with systemd `systemctl start razer-naga-2014-key-remap.service`
 
-Config file will be located in /etc/razer-naga-2014-key-remap.toml
-
-## Todo
-* get rid of uwraps
+Config file will be located in `/etc/razer-naga-2014-key-remap.toml`
