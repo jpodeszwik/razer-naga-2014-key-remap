@@ -4,8 +4,7 @@ extern crate serde_derive;
 extern crate toml;
 extern crate uinput;
 
-use std::env;
-use std::thread;
+use std::{env, thread};
 use std::time::Duration;
 
 mod naga;

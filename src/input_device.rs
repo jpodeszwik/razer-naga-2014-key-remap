@@ -1,6 +1,6 @@
-use uinput::{default, Device};
-use uinput::Error;
+use uinput::{Error, Device};
 use uinput::event::Keyboard::All;
+use uinput;
 
 pub fn create() -> Result<Device, String> {
     create_device()
@@ -8,7 +8,7 @@ pub fn create() -> Result<Device, String> {
 }
 
 fn create_device() -> Result<Device, Error> {
-    let device = default()?
+    let device = uinput::open("/dev/uinput")?
         .name("razer-naga-virtual-keyboard")?
         .event(All)?
         .create()?;
