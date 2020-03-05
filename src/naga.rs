@@ -28,8 +28,7 @@ impl Naga {
                 Err(_) => { continue; }
             };
 
-            if device.name().unwrap_or("").eq("Razer Razer Naga 2014")
-                && device.phys().unwrap_or("").ends_with("/input2") {
+            if device.name().unwrap_or("").eq("Logitech Gaming Mouse G600 Keyboard") {
                 device.grab(GrabMode::Grab).map_err(|e| format!("Could not grab device: {}", e))?;
                 return Ok(Naga { device, _file: file });
             }
